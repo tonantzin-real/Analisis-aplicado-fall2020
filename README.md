@@ -1,6 +1,6 @@
 # MAT 24430 Analisis-aplicado
 Repositorio para la clase de Análisis Aplicado.
-
+Hola alumnos 
 
 
 ## Antes de empezar ...
