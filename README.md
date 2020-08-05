@@ -6,17 +6,17 @@ Repositorio para la clase de Análisis Aplicado.
 ## Antes de empezar ...
 
 1. Instalar `git` 
-  1. Si estás en una distro de  `GNU/Linux` tipo `Debian`: `sudo apt-get install git`.
-  2. Si estás en una MacOS sigue las instrucciones de [aquí](http://git-scm.com/download/mac) y sigue las instrucciones.
+   1. Si estás en una distro de  `GNU/Linux` tipo `Debian`: `sudo apt-get install git`.
+   2. Si estás en una MacOS sigue las instrucciones de [aquí](http://git-scm.com/download/mac) y sigue las instrucciones.
 1. Crea una cuenta en github
 2. Crear una [llave `ssh`](https://help.github.com/articles/generating-ssh-keys) y conectarla a **Github**.
 2. *Forkear* este repositorio
 3. Instalar [`docker`](https://docs.docker.com/installation/#installation)
 4. Instalar **un editor de textos**
-  1. `GNU/Emacs`
-  2. `Sublime`
-  3. `VS Code`
-  4. `Atom`
+   1. `GNU/Emacs`
+   2. `Sublime`
+   3. `VS Code`
+   4. `Atom`
 
 
 ## El curso
