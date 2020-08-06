@@ -1,3 +1,3 @@
 # Datos del alumno
-- *Nombre:* Miguel Angel Escalante Serrato
+- **Nombre:** Miguel Angel Escalante Serrato
 
