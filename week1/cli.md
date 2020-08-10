@@ -1,6 +1,6 @@
 # La línea de comandos
 
-**NOTA**: Esta *lecture* está basada parcialmente en las notas del curso C4P de California Polytechnic State University, San Luis Obispo
+**NOTA**: Esta *lecture* está basada parcialmente en las notas del curso C4P de California Polytechnic State University, San Luis Obispo, y las notas del Dr. Adolfo de Unánue Tiscareño, con su permiso. 
 
 ## Introducción
 
