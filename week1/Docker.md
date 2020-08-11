@@ -67,17 +67,17 @@ docker ps -a
 - Descargarla
 
 ```
-docker pull Skalas/Analisis-aplicado-fall2020
+docker pull skalas/analisis-aplicado-fall2020
 ```
 
 - Creen un contenedor:
 
 ```
 
-docker run -p 8888:8888 -it Skalas/Analisis-aplicado-fall2020 
+docker run -p 8888:8888 -it skalas/analisis-aplicado-fall2020 
 ```
 - Aquí son el usuario `jovyan`.
-- Ejecuten el comando 
+- Ejecuten el comando `whoami`. Debería de aparecer `jovian`
 - Si llegaron hasta acá ¡Felicidades! No sufrirán más de lo necesario este curso.
 - Para salir de `docker` usen `Ctrl-d` o tecleen `exit`.
 
@@ -94,3 +94,4 @@ donde debes de cambiar `priceless_carson` por el nombre del contenedor (la últi
 ## Liga de ayuda
 
 Pueden ver [esto](https://github.com/wsargent/docker-cheat-sheet) si tienen dudas
+
