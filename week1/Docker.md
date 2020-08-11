@@ -18,7 +18,7 @@ Es una plataforma de virtualización además de un conjunto de comandos para est
 Una **imagen** es una especie de cascarón o plantilla no modificable. 
 
 > **Ejemplo** 
-> Ejemplos de imágenes son `ubuntu` y la imagen de la clase con la que trabajaremos (`itam-mate-computacional`).
+> Ejemplos de imágenes son `ubuntu` y la imagen de la clase con la que trabajaremos (`analisis-aplicado-2020`).
 
 Un **contenedor** es creado a partir de una *imagen*. Los contenedores es aquello con lo que vas a interactuar. Pueden ser ejecutados, iniciados, detenidos, movidos, borrados, etc. Cada contenedor es un ambiente aislado. Aunque pueden ser conectados entre sí.
 
