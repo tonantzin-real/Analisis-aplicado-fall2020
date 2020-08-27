@@ -1,5 +1,5 @@
 
-Datos del alumno 
+Datos del alumno: 
 •	Nombre:  José Luis Cordero Rodríguez 
 •	Clave única: 164860
 •	Correo electrónico: jlcr97@outlook.com
