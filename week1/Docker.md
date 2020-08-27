@@ -18,7 +18,7 @@ Es una plataforma de virtualización además de un conjunto de comandos para est
 Una **imagen** es una especie de cascarón o plantilla no modificable. 
 
 > **Ejemplo** 
-> Ejemplos de imágenes son `ubuntu` y la imagen de la clase con la que trabajaremos (`itam-mate-computacional`).
+> Ejemplos de imágenes son `ubuntu` y la imagen de la clase con la que trabajaremos (`analisis-aplicado-2020`).
 
 Un **contenedor** es creado a partir de una *imagen*. Los contenedores es aquello con lo que vas a interactuar. Pueden ser ejecutados, iniciados, detenidos, movidos, borrados, etc. Cada contenedor es un ambiente aislado. Aunque pueden ser conectados entre sí.
 
@@ -67,17 +67,17 @@ docker ps -a
 - Descargarla
 
 ```
-docker pull Skalas/Analisis-aplicado-fall2020
+docker pull skalas/analisis-aplicado-fall2020
 ```
 
 - Creen un contenedor:
 
 ```
 
-docker run -p 8888:8888 -it Skalas/Analisis-aplicado-fall2020 
+docker run -p 8888:8888 -it skalas/analisis-aplicado-fall2020 
 ```
 - Aquí son el usuario `jovyan`.
-- Ejecuten el comando 
+- Ejecuten el comando `whoami`. Debería de aparecer `jovian`
 - Si llegaron hasta acá ¡Felicidades! No sufrirán más de lo necesario este curso.
 - Para salir de `docker` usen `Ctrl-d` o tecleen `exit`.
 
@@ -94,3 +94,4 @@ donde debes de cambiar `priceless_carson` por el nombre del contenedor (la últi
 ## Liga de ayuda
 
 Pueden ver [esto](https://github.com/wsargent/docker-cheat-sheet) si tienen dudas
+
