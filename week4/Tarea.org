@@ -1,0 +1,53 @@
+
+* Tarea Análisis Aplicado Otoño 2020
+
+Para entender las implicaciones de resolver problemas de optimización numérica, es importante tener una manera base de calcular las derivadas de primer y segundo orden de manera programática, así como tener un entendimiento de las implicaciones en operaciones y en consumo de cómputo para poder calcular cada punto para las diferentes iteraciones de la optimización. 
+
+** Objetivo
+
+El objetivo de la tarea es generar 4 funciones, mismas que reciben sólo dos parámetros: ~f, xk~ donde ~f~ es la función a optimizar y ~xk~ es el punto donde se van a evaluar las diferentes funciones. 
+
+Un esqueleto de lo que hay que hacer es el siguiente: 
+
+#+begin_src python 
+def gradiente(f,xk):
+    # Código que calcula el gradiente de la 
+    # función f en el punto xk. 
+
+
+def hessiana(f,xk):
+    # Código que calcula la hessiana
+
+def condiciones_optimalidad(f,xk):
+    # Código que regresa si el punto xk cumple 
+    # con las condiciones de optimalidad
+
+def mk(f,xk):
+    # Código que genera la función de aproximación
+    # mk que vimos en clase para el algoritmo de 
+    # Región de confianza. 
+#+end_src
+
+Estas funciones tienen que estar en un archivo dentro de su carpeta personal en la carpeta de alumnos que tenemos en el repositorio. Cualquier cambio que esté fuera de la misma cancela el pull request, en automático. 
+
+*** Sugerencias:
+
+- Usar la librería ~numpy~ para el manejo de vectores. 
+- Usar una función sencilla para probar que lo que se está haciendo de hecho esté funcionando.
+- Pueden usar ~jupyter notebook~ dentro del docker y hacer los commits desde ahí.
+- Pueden generar también un archivo ~.py~ con las funciones y su caso de prueba.
+- Si tienen dudas de cómo calcular algo, pueden buscar en la bibliografía de la clase. 
+
+La tarea es individual, se busca que se encuentren con los problemas que usualmente se encontrarían en un caso real en el que se tenga que programar algún algoritmo. 
+
+** Fecha de entrega
+El límite para entregar la tarea es el domingo 20 de Septiembre del 2020 a las 23:59hrs. 
+
+** Método de entrega
+El método para entregar la tarea es através de un Pull Request que provenga del fork que cada uno generó al [[https://github.com/Skalas/Analisis-aplicado-fall2020][repositorio de la clase]]. 
+
+** Dudas
+
+Si tienen dudas de algo que no haya quedado claro con respecto a lo que se pide en esta tarea, por favor escribir en Teams, o por correo. 
+
+~Happy Coding :)~
