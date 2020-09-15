@@ -1,9 +1,13 @@
 
-* Tarea Análisis Aplicado Otoño 2020
+#+OPTIONS: toc:nil 
+#+TITLE: Tarea 1 Análisis Aplicado
+#+AUTHOR: Miguel Angel Escalante Serrato
+#+EMAIL:  miguel.escalante@itam.mx
+#+LANGUAGE: es
 
 Para entender las implicaciones de resolver problemas de optimización numérica, es importante tener una manera base de calcular las derivadas de primer y segundo orden de manera programática, así como tener un entendimiento de las implicaciones en operaciones y en consumo de cómputo para poder calcular cada punto para las diferentes iteraciones de la optimización. 
 
-** Objetivo
+* Objetivo
 
 El objetivo de la tarea es generar 4 funciones, mismas que reciben sólo dos parámetros: ~f, xk~ donde ~f~ es la función a optimizar y ~xk~ es el punto donde se van a evaluar las diferentes funciones. 
 
@@ -30,7 +34,7 @@ def mk(f,xk):
 
 Estas funciones tienen que estar en un archivo dentro de su carpeta personal en la carpeta de alumnos que tenemos en el repositorio. Cualquier cambio que esté fuera de la misma cancela el pull request, en automático. 
 
-*** Sugerencias:
+** Sugerencias:
 
 - Usar la librería ~numpy~ para el manejo de vectores. 
 - Usar una función sencilla para probar que lo que se está haciendo de hecho esté funcionando.
@@ -40,13 +44,13 @@ Estas funciones tienen que estar en un archivo dentro de su carpeta personal en 
 
 La tarea es individual, se busca que se encuentren con los problemas que usualmente se encontrarían en un caso real en el que se tenga que programar algún algoritmo. 
 
-** Fecha de entrega
+* Fecha de entrega
 El límite para entregar la tarea es el domingo 20 de Septiembre del 2020 a las 23:59hrs. 
 
-** Método de entrega
+* Método de entrega
 El método para entregar la tarea es através de un Pull Request que provenga del fork que cada uno generó al [[https://github.com/Skalas/Analisis-aplicado-fall2020][repositorio de la clase]]. 
 
-** Dudas
+* Dudas
 
 Si tienen dudas de algo que no haya quedado claro con respecto a lo que se pide en esta tarea, por favor escribir en Teams, o por correo. 
 
