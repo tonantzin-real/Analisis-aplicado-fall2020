@@ -45,7 +45,7 @@ function altHess(f::Function, x0::Array{Float64,1})
     return ForwardDiff.hessian(f,x0)
 end
 
-function grad1(f::Function, x0::Array{Float64,1}, h::Float64=1e-6)
+function grad(f::Function, x0::Array{Float64,1}, h::Float64=1e-6)
     #Encuentra el gradiente de matrices
     n=length(x0)
     res=Array{Float64}(undef, n)
