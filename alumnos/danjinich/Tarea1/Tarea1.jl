@@ -1,5 +1,19 @@
-using LinearAlgebra
-using ForwardDiff
+#=
+Todo este archivo esta basado en el
+Nocedal capitulo 2 y capitulo 8
+=#
+#=
+En este programa se usan multi-threading
+Para revisar cuantos threads pueden correr al mismo tiempo ver
+    Threads.nthreads()
+Para cambiar ese valor, desde la terminal linux debes de empezar julia con
+    julia --threads 4
+o se puede correr
+    export JULIA_NUM_THREADS=4
+Para mas info ver https://docs.julialang.org/en/v1/manual/multi-threading/
+=#
+using LinearAlgebra #Permite el uso de matrices
+using ForwardDiff #Hace todo lo que hace este programa pero mejor
 
 function is_pos_semi_def(hess::Array{Float64, 2})::Bool
     return all(x->x>=0,eigvals(hess))
@@ -22,8 +36,10 @@ function hess(f::Function, x0::Array{Float64,1}, h::Float64=1e-7)::Array{Float64
         xt=copy(x0); xt[i]+=h;
         fxt[i]=f(xt);
     end;
-    for i in 1:n
-        for j in 1:i
+
+    Threads.@threads for i in 1:n
+        #sleep(rand())
+        Threads.@threads for j in 1:i
             H[i,j]-=(fxt[i]+fxt[j]);
             xt=copy(x0); xt[i]+=h; xt[j]+=h;
             H[i,j]+=f(xt)+fx;
@@ -34,7 +50,10 @@ function hess(f::Function, x0::Array{Float64,1}, h::Float64=1e-7)::Array{Float64
             if i!=j
                 H[j,i]=H[i,j];
             end # if
+            #sleep(rand())
+            #println("done",i,j)
         end # for
+        #println("DONE",i)
     end # for
     return H
 end # function
@@ -50,7 +69,7 @@ function grad(f::Function, x0::Array{Float64,1}, h::Float64=1e-6)::Array{Float64
     n=length(x0)
     res=Array{Float64}(undef, n)
 
-    for i in 1:n
+    Threads.@threads for i in 1:n
         xt1=copy(x0)
         xt1[i]+=h
         xt2=copy(x0)
