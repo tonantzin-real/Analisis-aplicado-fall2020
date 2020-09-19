@@ -85,7 +85,7 @@ es peligroso, por lo que será mejor cambiar de usuario, en particular
 al usuario `jovyan`.
 
 - Teclea `su jovyan`. ¿Qué pasó?
-- Comprueba que eres el usuario `itam` ¿Cómo le podrías hacer?
+- Comprueba que eres el usuario `jovyan` ¿Cómo le podrías hacer?
 - Para saber donde estamos en el `file system` usamos `pwd` (de
   *printing working directory*).
   - Estamos posicionados en la raíz del árbol del sistema, el cual es
