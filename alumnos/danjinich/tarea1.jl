@@ -1,50 +1,78 @@
 using LinearAlgebra
 using ForwardDiff
 
-function check_optimality(grad::Array{Float64}, hess::Array{Float64})
+function is_pos_semi_def(hess::Array{Float64, 2})
+    return all(x->x>=0,eigvals(hess))
+end
+
+function check_optimality(grad::Array{Float64,1}, hess::Array{Float64, 2})
     #Checa optimalidad
     if all(x->x==0,grad)
-        return isposdef(hess)
+        return is_pos_semi_def(hess)
     end
     return false
 end
 
-function grad(f::Function, x0::Array{Real}, h::Float64=0.000001)
-    #Encuentra el gradiente de matrices si no son Float64
-    x0=convert(Array{Float64},x0)
-    return grad(f,x0)
+function hess(f::Function, x0::Array{Float64,1}, h::Float64=1e-7)
+    n = length(x0);
+    fx=f(x0);
+    H=zeros(n,n);
+    fxt=Array{Float64}(undef, n);
+    for i in 1:n
+        xt=copy(x0); xt[i]+=h;
+        fxt[i]=f(xt);
+    end;
+    for i in 1:n
+        for j in 1:i
+            H[i,j]-=(fxt[i]+fxt[j]);
+            xt=copy(x0); xt[i]+=h; xt[j]+=h;
+            H[i,j]+=f(xt)+fx;
+            if H[i,j]<h
+                H[i,j]=0.0;
+            end
+            H[i,j]/=h^2;
+            if i!=j
+                H[j,i]=H[i,j];
+            end # if
+        end # for
+    end # for
+    return H
+end # function
+
+function altHess(f::Function, x0::Array{Float64,1})
+    # La hessiana de una funcion f en un punto x0
+    # Asi se hace usando paquetes de Julia
+    return ForwardDiff.hessian(f,x0)
 end
 
-function grad(f::Function, x0::Array{Float64}, h::Float64=0.000001)
+function grad1(f::Function, x0::Array{Float64,1}, h::Float64=1e-6)
     #Encuentra el gradiente de matrices
-    res=Matrix{Float64}(undef, size(x0)[1], size(x0)[2])
+    n=length(x0)
+    res=Array{Float64}(undef, n)
 
     for i in 1:size(x0)[1]
-        for j in 1:size(x0)[2]
-            aux=copy(x0)
-            aux[i,j]-=h
-            res[i,j]=(f(x0)-f(aux))/h
-        end
+        xt1=copy(x0)
+        xt1[i]-=h
+        xt2=copy(x0)
+        xt2[i]-=h
+        res[i]=(f(xt1)-f(xt2))
+        res[i]/=2*h
     end
     return res
 end
 
-function altGrad(f::Function, x0::Array{Float64})
+function altGrad(f::Function, x0::Array{Float64,1})
     #Como se deberia de implementar el gradiente
+    # Asi se hace usando paquetes de Julia
     ForwardDiff.gradient(f, x0)
 end
 
-function f(x0::Array{Float64})
+function f(x0::Array{Float64,1})
     #La funcion que usamos
     return sqrt(sum(x0.^2))
 end
 
 function altF(x0)
-    #Como se deberia de implementar
+    # Como se deberia de implementar
     return norm(x0,2)
-end
-
-function hess(f::Function, x0::Array{Float64})
-    #La hessiana de una funcion f en un punto x0
-    return ForwardDiff.hessian(f,x0)
 end
