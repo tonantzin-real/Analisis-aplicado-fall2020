@@ -43,9 +43,6 @@ function hess(f::Function, x0::Array{Float64,1}, h::Float64=1e-7)::Array{Float64
             H[i,j]-=(fxt[i]+fxt[j]);
             xt=copy(x0); xt[i]+=h; xt[j]+=h;
             H[i,j]+=f(xt)+fx;
-            if H[i,j]<h
-                H[i,j]=0.0;
-            end
             H[i,j]/=h^2;
             if i!=j
                 H[j,i]=H[i,j];
@@ -94,4 +91,18 @@ end
 function altF(x0::Array{Float64,1})::Float64
     # Como se deberia de implementar
     return norm(x0,2)
+end
+
+function mk(f::Function, xk::Array{Float64,1})
+    n=length(xk);
+    H=Array{Float64}(undef, n,n);
+    g=Array{Float64}(undef, n);
+    t1=@async g=grad(f, xk);
+    t2=@async H=hess(f, xk);
+    fk=f(xk);
+    wait(t1); wait(t2);
+    g(p::Array{Float64,1})::Float64=begin;
+        return fk+transpose(g)*p+(1/2)*transpose(p)*H*p;
+    end
+    return g;
 end
