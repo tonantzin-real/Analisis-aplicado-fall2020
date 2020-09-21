@@ -21,7 +21,7 @@ def hess(f, x0, h=1e-7):
     for i in range(0, n):
         aux = np.copy(x0)
         aux[i] += h
-        fxt = f(aux)
+        fxt[i] = f(aux)
     # endFor
     for i in range(0, n):
         for j in range(0, i + 1):
@@ -56,3 +56,10 @@ def grad(f, x0, h=1e-7):
 
 def f(x0):
     return np.sqrt(sum(x0 ** 2))
+
+def mk(f,xk):
+    g = grad(f,xk)
+    H = hess(f,xk)
+    fk = f(xk)
+    mks = lambda p : fk+g.T*p+(1/2)*p.T*H*p;
+    return mks

@@ -101,8 +101,8 @@ function mk(f::Function, xk::Array{Float64,1})
     t2=@async H=hess(f, xk);
     fk=f(xk);
     wait(t1); wait(t2);
-    g(p::Array{Float64,1})::Float64=begin;
+    mks(p::Array{Float64,1})::Float64=begin;
         return fk+transpose(g)*p+(1/2)*transpose(p)*H*p;
     end
-    return g;
+    return mks;
 end
