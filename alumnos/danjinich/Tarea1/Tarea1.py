@@ -31,8 +31,6 @@ def hess(f, x0, h=1e-7):
             xt[i] += h
             xt[j] += h
             H[i, j] += f(xt) + fx
-            if H[i, j] < h:
-                H[i, j] = 0
             H[i, j] /= h ** 2
             if i != j:
                 H[j, i] = H[i, j]
