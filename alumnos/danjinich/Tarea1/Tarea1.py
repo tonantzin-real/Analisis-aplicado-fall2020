@@ -4,7 +4,8 @@ x0 = np.array([1.0, 2, 3, 4])
 
 
 def is_pos_semi_def(m):
-    return np.all(np.linalg.eig(m) <= 0)
+    w,v=np.linalg.eig(m)
+    return np.all(w <= 0)
 
 
 def check_optimality(grad, hes):
