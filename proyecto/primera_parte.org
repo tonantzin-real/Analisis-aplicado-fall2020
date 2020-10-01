@@ -1,0 +1,31 @@
+
+#+OPTIONS: toc:nil 
+#+TITLE: Primer Entregable Proyecto Análisis Aplicado
+#+AUTHOR: Miguel Angel Escalante Serrato
+#+EMAIL:  miguel.escalante@itam.mx
+#+LANGUAGE: es
+
+* Objetivo
+  El objetivo de este proyecto es estudiar e implementar el algoritmo de Búsqueda Lineal de Newton con modificación a la Hessiana. En concreto los algoritmos 3.1 y 3.2 del [[https://www.csie.ntu.edu.tw/~r97002/temp/num_optimization.pdf][libro de la clase]]. 
+
+* Herramientas
+  El algoritmo se debe implementar en python, se puede usar jupyter notebook o en su defecto generar una librería de archivos ~.py~ que se pueda importar. 
+
+Para calcular la hessiana y el gradiente se tienen que usar funciones hechas por ustedes, no es válido usar las librerías de scipy o numpy para obtenerlas.
+
+* Prueba
+  Para probar que su algoritmo funciona, van a usar la [[https://en.wikipedia.org/wiki/Rosenbrock_function][función de Rosenbrock]]. Con parámetros $a=1, b=100$, también exploren con otros parámetros para ver cómo se comporta el algoritmo. 
+
+* Fecha de entrega
+  El límite para entregar la tarea es el viernes 9 de octubre del 2020 a las 23:59hrs. 
+
+* Método de entrega
+  El método para entregar la tarea es através de un Pull Request que provenga del fork que cada uno generó al [[https://github.com/Skalas/Analisis-aplicado-fall2020][repositorio de la clase]]. 
+
+* Dudas
+
+Si tienen dudas de algo que no haya quedado claro con respecto a lo que se pide en esta tarea, por favor escribir en Teams, o por correo. 
+
+~Happy Coding :)~
+
+OJO: En el pdf y en el org del proyecto están los links al libro y a la función de Rosenbrock. 
