@@ -22,6 +22,9 @@ Para calcular la hessiana y el gradiente se tienen que usar funciones hechas por
 * Método de entrega
   El método para entregar la tarea es através de un Pull Request que provenga del fork que cada uno generó al [[https://github.com/Skalas/Analisis-aplicado-fall2020][repositorio de la clase]]. 
 
+* Porcentaje
+Este proyecto simboliza el 30% del entregable final del proyecto de clase, que tiene un peso de 40% en la calificación final. 
+
 * Dudas
 
 Si tienen dudas de algo que no haya quedado claro con respecto a lo que se pide en esta tarea, por favor escribir en Teams, o por correo. 
