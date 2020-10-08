@@ -1,4 +1,3 @@
-#include("Documents/Aplicado/Proyecto1.jl")
 #include("path/to/Proyecto1.jl")
 using LinearAlgebra #Permite el uso de matrices
 
@@ -57,11 +56,11 @@ function check_optimality(grad::Array{Float64,1}, hess::Array{Float64, 2}; tol::
     return false
 end
 
-function backtracking_line_search(f::Function, x::Array, d::Array, a::Float64; p=0.5, b=1e-4)::Float64
+function backtracking_line_search(f::Function, x::Array, d::Array; a::Float64=1.0, p::Float64=0.5, c::Float64=1e-4)::Float64
 	#Habia que hacerlo
 	y = f(x) 
 	g = grad(f,x)
-	while f(x + a * d) > y+b*a*dot(g,d)
+	while f(x + a * d) > y+c*a*dot(g,d)
 		a *= p
 	end
 	return a
@@ -83,13 +82,6 @@ function add_identity(A::Array{Float64,2}; b=1e-4)::Array{Float64,2}
 	return Bk
 end
 
-function modified_cholesky(A::Array{Float64,2})::Array{Float64,2}
-	n=size(A)[1]; v=sqrt(n^2-1)
-	g=maximum(diag(A))
-	i=Matrix{Float64}(I, n, n)
-	ep=maximum(A-(1e+100)*i)
-	
-end
 
 function line_search_newton_modification(f::Function, x0::Array; tol::Float64=1e-4, maxit::Int=10000)::Array{Float64,1}
 	xk=copy(x0); ak=1.0; n=length(x0)
@@ -104,7 +96,7 @@ function line_search_newton_modification(f::Function, x0::Array; tol::Float64=1e
 		end
 		Bk=add_identity(Hk)
 		pk=Bk \ (grad(f,xk)*(-1))
-		ak=backtracking_line_search(f,xk,pk,ak)
+		ak=backtracking_line_search(f,xk,pk; a=ak)
 		xk += ak*pk
 		j=i
 	end
@@ -127,4 +119,3 @@ function min_rosenbrock(x0::Array, a::Number, b::Number; tol::Float64=1e-10, max
 	println("El error relativo en y es:\t",abs((x[2]-a^2)/a^2))
 end
 #min_rosenbrock([rand(1:10),rand(1:100)], rand(1:10), rand(1:1000); tol=1e-10, maxit=10000)
-
