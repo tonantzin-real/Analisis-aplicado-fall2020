@@ -1,4 +1,4 @@
-module Proyecto_aplicado1
+module proyecto1
 
 using LinearAlgebra #Permite el uso de matrices
 
