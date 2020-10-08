@@ -3,7 +3,40 @@ Este es un proyecto en Julia, para poder correrlo hay que seguir las siguientes 
 1. Correr en la terminal `julia`
   * Se recomienda empezar usando `julia --threads 2` o algun otro numero en lugar de `2`. Este programa utiliza varios threads y mientras mayor sea el numero mayor va a ser la velocidad, esto esta acotado por el tamaño de la matriz mas grande.
 2. Dentro de Julia correr en la terminal `include("path/to/Proyecto1.jl")`, utilizado el path al proyecto.
-## Funciones
+## Guia basica de Julia
+Julia como lenguaje de programacion es relativamente sencillo, con sintaxis similar a lenguajes como Python, R y Matlab, una guia de sus diferencias basicas se puede ver [aqui](https://docs.julialang.org/en/v1/manual/noteworthy-differences/). Aqui estan presentadas algunas de las caracteristicas del lenguaje importantes para este proyecto.
+### Tipos
+El lenguaje Julia puede ser estricto con los tipos utilizados. Si la funcion pide un `Float64` es importante pasar algo que el compilador entiende como `Float64`, es decir si se quiere pasar un entero es importante agregar un `.0` despues del numero.
+### Vectores
+Los vectores son arreglos unidimensionales, que se pueden utilizar como vectores despues de importar el paquete `LinearAlgebra`. Al correr este programa se importa el paquete, pero la instruccion para importarlo es `using LinearAlgebra`. Un vector o arreglo se define como 
+```
+x=[1.0, 2, 3] #Arreglo de Float64
+x=[1, 2, 3] #Arreglo de Int64
+x=Array{Float64}(undef, 3) #Arreglo vacio de longitud 3
+x=zeros(3) #Arreglo de zeros de longtud 3
+```
+### Matrices
+Funcionan con los mismos principios que el vector, siendo arreglos bidimensionales.
+```
+x=[1.0 2 3; 4 5 6; 7 8 9] #Arreglo de Float64
+x=[1 2 3; 4 5 6; 7 8 9] #Arreglo de Int64
+x=Array{Float64}(undef, 3, 3) #Arreglo vacio de tamaño 3x3
+x=zeros(3, 3) #Arreglo de zeros de tamaño 3x3
+x=Matrix{Float64}(I, 3, 3) #Matriz identidad de 3x3
+```
+### Funciones
+Para definir una funcion anonima se puede hacer:
+```
+f(x)=x+1
+```
+Las funciones tienen dos tipos de parametros, los obligatorios y los opcionales. Los parametros obligatorios deben de pasar en el mismo orden que en la definicion de la funcion separados por comas. Si se quiere pasar parametros opcionales, se pone un `;` despues de los parametros obligatorios y se asignan con nombre al parametro:
+```
+f(x;y=1)=x+y
+f(5) #Regresa 6
+f(5;y=1) #Regresa 6
+f(5; y=7) #Regresa 12
+```
+## Documentacion
 ### is_pos_semi_def
 Esta funcion recibe un arreglo bidimensional de `Float64` y regresa un Booleano que es `true` si la matriz es semidefinida positiva y `false` si no lo es.
 #### Ejemplo:
@@ -46,16 +79,66 @@ julia> hess(f, [1,3]; h=1e-5)
 Esta función recibe una gradiente, una hessiana y opcionalmente recibe una tolerancia `tol` con default `1e-20`. Regresa un booleano que es `true` si es optimo y `false` si no es optimo.
 #### Ejemplo: 
 ```
-julia> f(x)=(x[1]^2)*(x[2]^2)
+julia> f(x)=x[1]^2+x[2]^2
 f (generic function with 1 method)
 
-julia> hess(f, [1,3]; h=1e-5)
-2×2 Array{Float64,2}:
- 18.0  12.0
- 12.0   2.0
+julia> x=[0.0, 0]
+2-element Array{Float64,1}:
+ 0.0
+ 0.0
+
+julia> check_optimality(grad(f,x),hess(f,x);tol=0.0)
+true
+```
+### backtracking_line_search
+Es el algoritmo 3.1 del Nocedal.  Recibe una funcion, un arreglo numerico, otro arreglo numerico y opcionalmente recibe tres variables `Float64` una `a` con default `1`, una `c` con default `1e-4` y una `p` (rho) con default `0.5`. Regresa un `Float64`.
+
+### add_identity
+Busca iterativamente un numero `t` tal que la matriz A+I*t sea definida positiva, regresa la matriz A+I*t. Recibe una matriz de `Float64` y opcionalmente un `Float64` `b` con default `1e-4`. Regresa una matriz definida positiva.
+
+### line_search_newton_modification
+Es el algoritmo 3.2 del Nocedal. Recibe una funcion y un punto inicial y opcionalmente recibe una tolerancia `tol` con default `1e-4` y un maximo de iteraciones `maxit` cond default `10000`. Regresa las cordenadas de la mejor aproximacion que se logro e imprime el numero de iteraciones.
+#### Ejemplo
+```
+julia> f(x)=x[1]^2+x[2]^2
+f (generic function with 1 method)
+
+julia> x=[10.0, 100]
+2-element Array{Float64,1}:
+  10.0
+ 100.0
+
+julia> line_search_newton_modification(f,x;tol=0.0,maxit=1000000)
+Numero de iteraciones:	4
+2-element Array{Float64,1}:
+ 0.0
+ 0.0
+```
+### rosenbrock 
+Es la funcion de Rosenbrock. Recibe un arreglo numerico y opcionalmente numeros `a` con default `1` y `b` y regresa el resultado de la funcion de rosenbrock
+#### Ejemplo
+```
+julia> rosenbrock([1,2]; a=2, b=200)
+201
+```
+### min_rosenbrock
+Esta funcion sirve para demostrar el funcionamiento del codigo. Recibe un punto inicial, un valor de a y un valor de b y opcionalmente recibe una tolerancia `tol` con default `1e-10` y un maximo de iteraciones `maxit` con default `10000`. Imprime un reporte con el resultado exacto, el numero de iteraciones, el resultado exacto y el error.
+#### Ejemplo
+```
+julia> min_rosenbrock([rand(1:10),rand(1:100)], rand(1:10), rand(1:1000); tol=0.0, maxit=10000)
+El minimo real es:		f([2,4])=0
+Numero de iteraciones:	10000
+El minimo que se encontro es:	f([2.000000000000077,4.000000000000307])=5.9024545080899156e-27
+
+
+El error absoluto en x es:	7.682743330406083e-14
+El error relativo en x es:	3.8413716652030416e-14
+
+El error absoluto en y es:	3.0730973321624333e-13
+El error relativo en y es:	7.682743330406083e-14
 ```
 
-Proyecto elaborado por:
+## Integrantes
 * Dan Jinich
 * Maria Jose Sedano 
 * Oscar Aguilar
