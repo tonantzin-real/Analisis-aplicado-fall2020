@@ -1,0 +1,203 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 54,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np\n",
+    "import scipy.linalg as la"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 93,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def condiciones_optimalidad(grad, hess):\n",
+    "    # Código que regresa si el punto xk cumple \n",
+    "    # con las condiciones de optimalidad.\n",
+    "    # La matriz hessiana debe ser positiva definida, \n",
+    "    # en otras palabras sus valores propios deben ser positivos.\n",
+    "    propios, vectores = la.eig(hess)\n",
+    "    Bandera = True\n",
+    "    for L in propios:\n",
+    "        if L <= 0:\n",
+    "            Bandera = False\n",
+    "    # El gradiente debe ser nulo.\n",
+    "    return grad.all() == np.zeros(len(grad)).all() and Bandera"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 61,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def gradiente(f, xk):\n",
+    "    n = len(xk)\n",
+    "    res = np.zeros(n)\n",
+    "    for i, xi in enumerate(xk):\n",
+    "        eps = np.zeros(n)\n",
+    "        eps[i] += 0.000001\n",
+    "        res[i] = (f(xk + eps) - f(xk)) / 0.000001 \n",
+    "    return res"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 80,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def hessiana(f, xk):\n",
+    "    # Código que calcula la hessiana.\n",
+    "    \n",
+    "    # Aprovechamos el método del gradiente ya programado:\n",
+    "    a = gradiente(f, xk)\n",
+    "    # Declaramos algunos datos necesarios\n",
+    "    n = len(xk)\n",
+    "    eps = 0.000001\n",
+    "    res = np.zeros([n,n])\n",
+    "    # Calculo del hessiano\n",
+    "    for i in range(n):\n",
+    "        eps = np.zeros(n)\n",
+    "        eps[i] += 0.000001\n",
+    "        m = (gradiente(f, xk + eps) - gradiente(f, xk)) / 0.000001\n",
+    "        for j in range(len(m)):\n",
+    "            res[i][j] = m[j]\n",
+    "    return res"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 58,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def f(x0):\n",
+    "    return x0[0] * x0[1] ** 2 * x0[2] ** 3"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 86,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def mk(f,xk,p):\n",
+    "    # Código que genera la función de aproximación\n",
+    "    # mk que vimos en clase para el algoritmo de \n",
+    "    # Región de confianza.\n",
+    "    H = hessiana(f,xk)\n",
+    "    G = gradiente(f,xk)\n",
+    "     \n",
+    "    return f(xk) + p.T * G + 0.5 * p.T * H * p"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 62,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[32.         64.00001601 96.00004802]\n"
+     ]
+    }
+   ],
+   "source": [
+    "a = [2,2,2]\n",
+    "print(gradiente(f, a))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 81,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[ 0.         32.00284482 48.00426723]\n",
+      " [32.00284482 32.00284482 95.9943236 ]\n",
+      " [48.00426723 95.9943236  95.9943236 ]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(hessiana(f,a))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 87,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[ 76.27926577  67.38462606 150.99843359]\n",
+      " [ 78.63541846  67.38462606 164.90610457]\n",
+      " [ 79.81349481  67.47182072 164.90610457]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "p = np.random.random(3)\n",
+    "print(mk(f,a,p))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 94,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "False\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(condiciones_optimalidad(gradiente(f, a),hessiana(f,a)))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
