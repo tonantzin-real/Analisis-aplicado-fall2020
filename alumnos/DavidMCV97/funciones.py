@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
 import numpy as np
 
 def gradiente(f,x):
@@ -173,3 +170,14 @@ def wolfe_fuerte(f,x,p,alpha,c1,c2):
             bueno = True
             
     return bueno
+
+def volver_pd(x):
+    if np.all(np.linalg.eigvals(x) > 0) == True:
+        return x #la matriz es positiva definida
+    else:
+        e=abs(np.linalg.eigvals(x)) #eigenvalor más chico en abs
+        l=min(e)+3*np.finfo(float).eps #lambda es e más el épsilon de la 
+        #computadora (3 veces porque si no se enoja)
+        E=np.identity(len(x))
+        x=x+(l*E) #a x le sumo lambda veces la identidad
+    return x
