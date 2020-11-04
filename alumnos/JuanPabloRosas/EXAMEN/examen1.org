@@ -1,0 +1,21 @@
+#+OPTIONS: toc:nil 
+#+TITLE: 
+#+OPTIONS: author:nil 
+#+LANGUAGE: es
+* Examen parcial
+** Teoría
+*** ELI5 (30 puntos)
+ Explícame como si tuviera 5 años. Es un subreddit muy popular donde se explican conceptos muy interesantes de maneras muy sencillas. Richard Feynman tenía una metodologia de aprendizaje que involucra explicar conceptos complejos a un niño. Por ende para esta parte del examen tenemos lo siguiente:
+ - Explica el algoritmo de búsqueda lineal a un niño de 5 años.
+ - Explica el algoritmo de región de confianza a un niño de 5 años.
+*** Demostración (30 puntos)
+ Si tenemos $f$ una cuadrática convexa $f(x)=\dfrac{1}{2}x^TQx-b^Tx$. Demuestra que el minimizador de una dimensión sobre la linea $x_k + \alpha p_k$ es: 
+ $$ \alpha_k = -\dfrac{\nabla f_k^Tp_k}{p_k^TQp_k}$$
+
+** Code (40 puntos)
+
+ En la carpeta data hay una base de datos. Que contiene datos de delitos cometidos en la Ciudad de México, para mayo referencia de cómo obtener estos datos, ver [[https://hoyodecrimen.com/][esta página]].
+
+ La jefa de gobierno te dice que hubo un problema y que vamos a reinstalar las cámaras de seguridad de los sectores que componen esta base de datos, esto implica que podemos ubicar las cámaras en mejores lugares a los que están. No tenemos certeza de cuántas cámaras serán, pero para simplicidad del problema asumamos que tenemos 8000 cámaras de seguridad. Te piden ayuda para elegir la posición óptima de las 8000 nuevas cámaras. 
+
+ Establece claramente la métrica que vas a buscar optimizar y cuál es el razonamiento para resolver el problema de colocar las cámaras asi como generar una función que calcule, para un conjunto de 8000 puntos, la función de costo que se optimizará. 
