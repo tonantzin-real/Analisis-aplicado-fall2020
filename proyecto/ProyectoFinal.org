@@ -10,7 +10,7 @@
 - BFGS
 - Búsqueda Lineal de Newton con modificación a la Hessiana.
 - Algoritmo de Newton.
-- Búsqueda Lineal. 
+- Búsqueda Lineal Base. (Sin modificaciones a la Hessiana). 
 
 * Herramientas
 El algoritmo se debe implementar en python, se puede usar jupyter notebook o en su defecto generar una librería de archivos ~.py~ que se pueda importar. 
