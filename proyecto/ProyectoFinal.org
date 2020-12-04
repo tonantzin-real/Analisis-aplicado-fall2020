@@ -1,0 +1,42 @@
+
+#+OPTIONS: toc:nil 
+#+TITLE:  Proyecto Final Análisis Aplicado
+#+AUTHOR: Miguel Angel Escalante Serrato
+#+EMAIL:  miguel.escalante@itam.mx
+#+LANGUAGE: es
+
+* Objetivo
+  El objetivo del proyecto final es explorar las implicaciones de la implementación de un algoritmo de optimización completo así como tenerlo de manera accesible para los demás. Se busca que implementen los siguientes algoritmos en una misma clase de Python.
+- BFGS
+- Búsqueda Lineal de Newton con modificación a la Hessiana.
+- Algoritmo de Newton.
+- Búsqueda Lineal Base. (Sin modificaciones a la Hessiana). 
+
+* Herramientas
+El algoritmo se debe implementar en python, se puede usar jupyter notebook o en su defecto generar una librería de archivos ~.py~ que se pueda importar. 
+
+Para calcular la hessiana y el gradiente se tienen que usar funciones hechas por ustedes, no es válido usar las librerías de scipy o numpy para obtenerlas.
+
+* Prueba
+  Para probar que su algoritmo funciona, van a usar la [[https://en.wikipedia.org/wiki/Rosenbrock_function][función de Rosenbrock]]. Con parámetros $a=1, b=100$, también exploren con otros parámetros para ver cómo se comporta el algoritmo. Además tomaremos en cuenta el problema del examen, y haremos la optimización para resolver el problema de las cámaras de seguridad. La función propuesta para optimizar es:
+
+  $$ f( cams ) = \sum_i \sum_j||cam_i - crimen_j||^2_2 + \sum_{i\neq j}\dfrac{1}{||cam_i-cam_j||_2^2}$$
+
+* Fecha de entrega
+  La fecha de entrega es el día del examen final, sábado 12 de diciembre a las 11:30hrs. 
+
+* Método de entrega
+  El método para entregar la tarea es através de un Pull Request que provenga del fork que cada uno generó al [[https://github.com/Skalas/Analisis-aplicado-fall2020][repositorio de la clase]]. Dentro de la carpeta Proyecto, poner una carpeta por equipo, y dentro de la carpeta poner los archivos necesarios para correr el proyecto, además de esto, se espera un Readme.md, donde expliquen un poco del proyecto, cómo lo pensaron qué modificaciones le hicieron y nombres de todos los integrantes. 
+
+
+* Porcentaje
+  Este proyecto representa el 70% del entregable final del proyecto de clase, que tiene un peso de 40% en la calificación final. 
+
+* Dudas
+
+  Si tienen dudas de algo que no haya quedado claro con respecto a lo que se pide en esta tarea, por favor escribir en Teams, o por correo. 
+  noec
+  ~Happy Coding :)~
+  
+  OJO: En el pdf y en el org del proyecto están los links al libro y a la función de Rosenbrock. 
+  
